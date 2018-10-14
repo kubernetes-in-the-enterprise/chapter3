@@ -1,0 +1,19 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  volumes:
+    - name: persistentsharedspace
+      persistentVolumeClaim:
+       claimName: my-pv-claim
+  containers:
+  - name: nginx
+    image: nginx:1.7.9
+    volumeMounts:
+      - mountPath: "/containerMount"
+        name: persistentsharedspace
+    ports:
+    - containerPort: 80
+

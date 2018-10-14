@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name:  configmapexample-volume
+spec:
+   containers:
+     - name:  configmapexample-volume
+       image: busybox
+       command:  [ "/bin/sh", "-c", "ls /etc/bt_config ; cat /etc/bt_config/customkey1 ; echo"]
+       volumeMounts:
+       - name: config-volume
+         mountPath: /etc/bt_config
+       imagePullPolicy: IfNotPresent
+   volumes:
+     - name: config-volume
+       configMap:
+         name: custom-config

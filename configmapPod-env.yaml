@@ -1,0 +1,22 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmapexample
+spec:
+  containers:
+  - name: configmapexample
+    image: busybox
+    command:  [ "/bin/sh", "-c", "echo customkey1: $(KEY1)  customkey2: $(KEY2) " ]
+    env:
+      - name:  KEY1
+        valueFrom:
+          configMapKeyRef:
+           name: custom-config
+           key:  customkey1
+      - name:  KEY2
+        valueFrom:
+          configMapKeyRef:
+           name: custom-config
+           key:  customkey2
+
